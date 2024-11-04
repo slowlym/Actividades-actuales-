@@ -8,61 +8,72 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f4f4f4;
+            background: linear-gradient(135deg, #e0f7fa 30%, #80deea 100%); /* Degradado de fondo */
             margin: 0;
             padding: 0;
+            animation: fadeIn 1s; /* Animación de entrada */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         header {
-            background-color: #4CAF50;
+            background-color: #00796b; /* Color verde más oscuro */
             color: white;
             padding: 20px;
             text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Sombra en el header */
+            border-bottom: 5px solid #004d40; /* Borde inferior */
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-transform: uppercase; /* Texto en mayúsculas */
+            animation: slideIn 1s; /* Animación de entrada */
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
         .container {
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px; /* Bordes más redondeados */
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+            transition: box-shadow 0.3s, transform 0.3s; /* Transiciones suaves */
+        }
+        .container:hover {
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3); /* Sombra al pasar el mouse */
+            transform: translateY(-5px); /* Elevar ligeramente al pasar el mouse */
         }
         .activity {
-            background: #e7f3fe;
-            border-left: 5px solid #2196F3;
+            background: #bbdefb; /* Nuevo color de fondo */
+            border-left: 5px solid #1976d2; /* Nuevo color del borde */
             margin: 10px 0;
-            padding: 10px;
-            border-radius: 4px;
-            transition: transform 0.2s;
+            padding: 15px;
+            border-radius: 8px; /* Bordes más redondeados */
+            transition: transform 0.3s, box-shadow 0.3s; /* Transiciones suaves */
         }
         .activity:hover {
-            transform: scale(1.02);
+            transform: translateY(-5px); /* Elevar ligeramente al pasar el mouse */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra al pasar el mouse */
         }
         footer {
             text-align: center;
             margin-top: 20px;
-            font-size: 0.8em;
-            color: #777;
+            font-size: 0.9em; /* Tamaño de fuente ligeramente más grande */
+            color: #555; /* Color de texto más suave */
+            animation: fadeIn 1s; /* Animación de entrada */
         }
         .description {
             font-style: italic;
-            color: #555;
-        }
-        .admin-panel {
-            display: none; /* Oculto por defecto */
-            margin: 20px 0;
-            padding: 10px;
-            background: #fff3cd;
-            border: 1px solid #ffeeba;
-            border-radius: 5px;
-        }
-        .admin-panel input {
-            margin: 5px 0;
-            width: calc(100% - 12px); /* Ajusta el ancho del input */
-            padding: 5px;
+            color: #666; /* Color más suave para la descripción */
         }
         /* Estilos para los botones */
         button {
-            background-color: #4CAF50; /* Color de fondo */
+            background-color: #00796b; /* Color de fondo */
             color: white; /* Color del texto */
             border: none; /* Sin borde */
             padding: 10px 20px; /* Espaciado interno */
@@ -71,16 +82,17 @@
             font-size: 16px; /* Tamaño de fuente */
             transition: background-color 0.3s, transform 0.2s; /* Transiciones suaves */
             margin: 5px; /* Margen entre botones */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra en botones */
         }
         button:hover {
-            background-color: #45a049; /* Color de fondo al pasar el mouse */
+            background-color: #004d40; /* Color más oscuro al pasar el mouse */
             transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el mouse */
         }
         .deleteActivityButton {
             background-color: #f44336; /* Color rojo */
         }
         .deleteActivityButton:hover {
-            background-color: #d32f2f; /* Color rojo más oscuro al pasar el mouse */
+            background-color: #c62828; /* Color rojo más oscuro al pasar el mouse */
         }
         /* Estilos para el modal */
         .modal {
@@ -93,15 +105,22 @@
             height: 100%;
             overflow: auto;
             background-color: rgba(0, 0, 0, 0.7);
+            animation: fadeIn 0.5s; /* Animación de entrada para el modal */
         }
         .modal-content {
             margin: 15% auto;
             padding: 20px;
             background-color: white;
-            border-radius: 8px;
+            border-radius: 12px; /* Bordes más redondeados */
             width: 80%;
             max-width: 600px;
             text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra en el modal */
+            transform: scale(0); /* Comienza en escala 0 */
+            transition: transform 0.3s ease; /* Transición suave para la escala */
+        }
+        .modal-content.show {
+            transform: scale(1); /* Escala normal al mostrar */
         }
         .close {
             color: #aaa;
@@ -118,13 +137,34 @@
         img {
             max-width: 100%;
             height: auto;
+            border-radius: 8px; /* Bordes redondeados para las imágenes */
+        }
+        /* Estilos para móviles */
+        @media (max-width: 600px) {
+            header {
+                padding: 15px; /* Menos padding en móviles */
+            }
+            .container {
+                padding: 15px; /* Menos padding en móviles */
+            }
+            button {
+                width: 100%; /* Botones ocupan el ancho completo */
+                padding: 12px; /* Aumentar el padding de los botones */
+                font-size: 18px; /* Aumentar el tamaño de fuente en móviles */
+            }
+            .activity {
+                padding: 10px; /* Menos padding en actividades */
+            }
+            .modal-content {
+                width: 90%; /* Aumentar el ancho en móviles */
+                padding: 15px; /* Menos padding en el modal */
+            }
         }
     </style>
 </head>
 <body>
 <header>
-    <h1>Area de Ingeniería Informática Sección 11</h1>
-    <button id="adminButton">Acceder al Panel de Administración</button>
+    <h1>Área de ingeniería Informática (11)</h1>
     <button id="horarioButton">Ver Horario Actual</button>
     <button id="profesoresButton">Ver Profesores y Materias</button> <!-- Nuevo botón -->
 </header>
@@ -133,47 +173,33 @@
 </div>
 <div class="container" id="profesoresContainer" style="display: none;">
     <!-- Los profesores se cargarán aquí -->
-</div>
-<div class="admin-panel" id="adminPanel">
-    <h2>Panel de Administración</h2>
-    <input type="text" id="activityTitle" placeholder="Título de la actividad">
-    <input type="text" id="activityDate" placeholder="Fecha de la actividad">
-    <input type="text" id="activityTime" placeholder="Hora de la actividad">
-    <input type="text" id="activityDescription" placeholder="Descripción de la actividad">
-    <button id="addActivityButton">Agregar Actividad</button>
-    <div id="adminActivitiesContainer"></div>
+    <button id="backButton">Volver a Actividades</button> <!-- Botón para volver -->
 </div>
 <footer>
-    <p>&copy; 2024 SLOWLYM, AREA DE INGENIERIA INFORMÁTICA</p>
+    <p>&copy; BY SLOWLYM, UNERG</p>
 </footer>
 <!-- Modal para mostrar el horario -->
 <div id="myModal" class="modal">
-    <div class="modal-content">
+    <div class="modal-content" id="modalContent">
         <span class="close">&times;</span>
         <img src="horario_actual.png" alt="Horario Actual">
     </div>
 </div>
 <script>
-    const adminButton = document.getElementById('adminButton');
-    const adminPanel = document.getElementById('adminPanel');
     const activitiesContainer = document.getElementById('activitiesContainer');
-    const adminActivitiesContainer = document.getElementById('adminActivitiesContainer');
     const horarioButton = document.getElementById('horarioButton');
     const profesoresButton = document.getElementById('profesoresButton');
     const profesoresContainer = document.getElementById('profesoresContainer');
     const modal = document.getElementById('myModal');
     const closeModal = document.getElementsByClassName('close')[0];
-    
-    // Contraseña para acceder al panel
-    const password = "admin123"; // Cambia esto por la contraseña que desees
-    
+    const backButton = document.getElementById('backButton');
+    const modalContent = document.getElementById('modalContent');
     // Actividades de ejemplo
     const exampleActivities = [
         { title: "Taller de Lenguaje y comunicacion", date: "04 de Noviembre 2024", time: "10:00 AM", description: "La comunicación" },
         { title: "Examen de Logica Matemática", date: "06 de noviembre 2024", time: "10:45 PM", description: "Proposiciones" },
         { title: "", date: "17 de noviembre 2023", time: "9:00 AM - 11:00 AM", description: "" }
     ];
-
     // Profesores de ejemplo
     const profesores = [
         { nombre: "Diana Silva", materia: "Lenguaje y Comunicación" },
@@ -183,20 +209,15 @@
         { nombre: "Francis Ron", materia: "Fundamentos de la Informática" },
         { nombre: "Luis Gonzales", materia: "Ingles I" },
         { nombre: "Javier Almerida", materia: "Lógica Matemática" }
-     
     ];
-
     // Cargar actividades desde localStorage
     function loadActivities() {
         const activities = JSON.parse(localStorage.getItem('activities')) || exampleActivities;
         activitiesContainer.innerHTML = ''; // Limpiar el contenedor
-        adminActivitiesContainer.innerHTML = ''; // Limpiar el contenedor del panel de administración
         activities.forEach(activity => {
             addActivityToDOM(activity);
-            addActivityToAdminDOM(activity);
         });
     }
-
     // Función para agregar actividad al DOM
     function addActivityToDOM(activity) {
         const newActivity = document.createElement('div');
@@ -209,73 +230,6 @@
         `;
         activitiesContainer.appendChild(newActivity);
     }
-
-    // Función para agregar actividad al DOM del panel de administración
-    function addActivityToAdminDOM(activity) {
-        const newActivity = document.createElement('div');
-        newActivity.classList.add('activity');
-        newActivity.innerHTML = `
-            <div>
-                <h2>${activity.title}</h2>
-                <p>Fecha: ${activity.date}</p>
-                <p>Hora: ${activity.time}</p>
-                <p class="description">${activity.description}</p>
-            </div>
-            <button class="deleteActivityButton">Eliminar</button>
-        `;
-        adminActivitiesContainer.appendChild(newActivity);
-        // Agregar evento para eliminar actividad
-        newActivity.querySelector('.deleteActivityButton').addEventListener('click', () => {
-            deleteActivity(activity.title);
-        });
-    }
-
-    // Función para agregar actividad
-    function addActivity() {
-        const title = document.getElementById('activityTitle').value;
-        const date = document.getElementById('activityDate').value;
-        const time = document.getElementById('activityTime').value;
-        const description = document.getElementById('activityDescription').value;
-        if (title && date && time && description) {
-            const activity = { title, date, time, description };
-            const activities = JSON.parse(localStorage.getItem('activities')) || [];
-            activities.push(activity);
-            localStorage.setItem('activities', JSON.stringify(activities));
-            addActivityToDOM(activity); // Agregar al DOM
-            addActivityToAdminDOM(activity); // Agregar al panel de administración
-            clearInputFields();
-        } else {
-            alert("Por favor, completa todos los campos.");
-        }
-    }
-
-    // Función para eliminar actividad
-    function deleteActivity(title) {
-        const activities = JSON.parse(localStorage.getItem('activities')) || [];
-        const updatedActivities = activities.filter(activity => activity.title !== title);
-        localStorage.setItem('activities', JSON.stringify(updatedActivities));
-        loadActivities(); // Recargar actividades
-    }
-
-    // Limpiar campos de entrada
-    function clearInputFields() {
-        document.getElementById('activityTitle').value = '';
-        document.getElementById('activityDate').value = '';
-        document.getElementById('activityTime').value = '';
-        document.getElementById('activityDescription').value = '';
-    }
-
-    // Función para mostrar el panel de administración
-    adminButton.addEventListener('click', () => {
-        const userPassword = prompt("Por favor, ingresa la contraseña:");
-        if (userPassword === password) {
-            adminPanel.style.display = 'block';
-            adminButton.style.display = 'none'; // Esconde el botón después de acceder
-        } else {
-            alert("Contraseña incorrecta.");
-        }
-    });
-
     // Función para mostrar la lista de profesores
     function mostrarProfesores() {
         profesoresContainer.innerHTML = ''; // Limpiar el contenedor
@@ -290,28 +244,35 @@
         });
         profesoresContainer.style.display = 'block'; // Mostrar el contenedor de profesores
         activitiesContainer.style.display = 'none'; // Ocultar contenedor de actividades
-        adminPanel.style.display = 'none'; // Ocultar panel de administración
     }
-
+    // Función para volver a la vista de actividades
+    function volverAActividades() {
+        profesoresContainer.style.display = 'none'; // Ocultar contenedor de profesores
+        activitiesContainer.style.display = 'block'; // Mostrar contenedor de actividades
+        window.scrollTo(0, 0); // Volver al principio de la página
+    }
     // Agregar eventos a los botones
-    document.getElementById('addActivityButton').addEventListener('click', addActivity);
     horarioButton.addEventListener('click', () => {
-        modal.style.display = 'block';
+        modal.style.display = 'block'; // Mostrar el modal
+        setTimeout(() => {
+            modalContent.classList.add('show'); // Agregar clase para la animación de acercamiento
+        }, 10); // Esperar un breve momento para asegurar que el modal esté visible
     });
     profesoresButton.addEventListener('click', mostrarProfesores);
-
+    backButton.addEventListener('click', volverAActividades); // Evento para volver
     // Cerrar el modal
     closeModal.onclick = function() {
-        modal.style.display = 'none';
+        modalContent.classList.remove('show'); // Remover clase para la animación de alejamiento
+        setTimeout(() => {
+            modal.style.display = 'none'; // Ocultar el modal después de la animación
+        }, 300); // Esperar el tiempo de la animación antes de ocultar
     }
-
     // Cerrar el modal si se hace clic fuera de él
     window.onclick = function(event) {
         if (event.target === modal) {
-            modal.style.display = 'none';
+            closeModal.onclick(); // Llamar a la función de cerrar modal
         }
     }
-
     // Cargar actividades al iniciar
     loadActivities();
 </script>
