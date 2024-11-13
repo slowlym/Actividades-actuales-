@@ -8,95 +8,110 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #e0f7fa 30%, #80deea 100%); /* Degradado de fondo */
+            background: linear-gradient(135deg, #e0f7fa 30%, #80deea 100%);
             margin: 0;
             padding: 0;
-            animation: fadeIn 1s; /* Animación de entrada */
+            animation: fadeIn 1s;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
         header {
-            background-color: #00796b; /* Color verde más oscuro */
+            background-color: #00796b;
             color: white;
             padding: 20px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Sombra en el header */
-            border-bottom: 5px solid #004d40; /* Borde inferior */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 5px solid #004d40;
         }
         h1 {
             margin: 0;
             font-size: 2.5em;
-            text-transform: uppercase; /* Texto en mayúsculas */
-            animation: slideIn 1s; /* Animación de entrada */
+            text-transform: uppercase;
+            animation: slideIn 1s;
         }
         @keyframes slideIn {
             from { transform: translateY(-20px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
+        }
+        .semester {
+            font-size: 1.5em;
+            margin-top: 10px;
+            color: #e0f7fa; /* Color más claro para el semestre */
+            animation: pulse 1.5s infinite alternate, colorChange 3s infinite alternate; /* Efecto de pulsación y cambio de color */
+            white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
+            overflow: hidden; /* Ocultar el desbordamiento */
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        @keyframes colorChange {
+            0% { color: #e0f7fa; }
+            50% { color: #80deea; }
+            100% { color: #00796b; }
         }
         .container {
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
             background: white;
-            border-radius: 12px; /* Bordes más redondeados */
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
-            transition: box-shadow 0.3s, transform 0.3s; /* Transiciones suaves */
+            border-radius: 12px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            transition: box-shadow 0.3s, transform 0.3s;
         }
         .container:hover {
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3); /* Sombra al pasar el mouse */
-            transform: translateY(-5px); /* Elevar ligeramente al pasar el mouse */
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
         }
         .activity {
-            background: #bbdefb; /* Nuevo color de fondo */
-            border-left: 5px solid #1976d2; /* Nuevo color del borde */
+            background: #bbdefb;
+            border-left: 5px solid #1976d2;
             margin: 10px 0;
             padding: 15px;
-            border-radius: 8px; /* Bordes más redondeados */
-            transition: transform 0.3s, box-shadow 0.3s; /* Transiciones suaves */
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         .activity:hover {
-            transform: translateY(-5px); /* Elevar ligeramente al pasar el mouse */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra al pasar el mouse */
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
         footer {
             text-align: center;
             margin-top: 20px;
-            font-size: 0.9em; /* Tamaño de fuente ligeramente más grande */
-            color: #555; /* Color de texto más suave */
-            animation: fadeIn 1s; /* Animación de entrada */
+            font-size: 0.9em;
+            color: #555;
+            animation: fadeIn 1s;
         }
         .description {
             font-style: italic;
-            color: #666; /* Color más suave para la descripción */
+            color: #666;
         }
-        /* Estilos para los botones */
         button {
-            background-color: #00796b; /* Color de fondo */
-            color: white; /* Color del texto */
-            border: none; /* Sin borde */
-            padding: 10px 20px; /* Espaciado interno */
-            border-radius: 5px; /* Bordes redondeados */
-            cursor: pointer; /* Cambia el cursor al pasar el mouse */
-            font-size: 16px; /* Tamaño de fuente */
-            transition: background-color 0.3s, transform 0.2s; /* Transiciones suaves */
-            margin: 5px; /* Margen entre botones */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra en botones */
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
+            margin: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
         button:hover {
-            background-color: #004d40; /* Color más oscuro al pasar el mouse */
-            transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el mouse */
+            background-color: #004d40;
+            transform: scale(1.05);
         }
         .deleteActivityButton {
-            background-color: #f44336; /* Color rojo */
+            background-color: #f44336;
         }
         .deleteActivityButton:hover {
-            background-color: #c62828; /* Color rojo más oscuro al pasar el mouse */
+            background-color: #c62828;
         }
-        /* Estilos para el modal */
         .modal {
-            display: none; /* Oculto por defecto */
+            display: none;
             position: fixed;
             z-index: 1000;
             left: 0;
@@ -105,22 +120,22 @@
             height: 100%;
             overflow: auto;
             background-color: rgba(0, 0, 0, 0.7);
-            animation: fadeIn 0.5s; /* Animación de entrada para el modal */
+            animation: fadeIn 0.5s;
         }
         .modal-content {
             margin: 15% auto;
             padding: 20px;
             background-color: white;
-            border-radius: 12px; /* Bordes más redondeados */
+            border-radius: 12px;
             width: 80%;
             max-width: 600px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra en el modal */
-            transform: scale(0); /* Comienza en escala 0 */
-            transition: transform 0.3s ease; /* Transición suave para la escala */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transform: scale(0);
+            transition: transform 0.3s ease;
         }
         .modal-content.show {
-            transform: scale(1); /* Escala normal al mostrar */
+            transform: scale(1);
         }
         .close {
             color: #aaa;
@@ -137,43 +152,43 @@
         img {
             max-width: 100%;
             height: auto;
-            border-radius: 8px; /* Bordes redondeados para las imágenes */
+            border-radius: 8px;
         }
-        /* Estilos para móviles */
         @media (max-width: 600px) {
             header {
-                padding: 15px; /* Menos padding en móviles */
+                padding: 15px;
             }
             .container {
-                padding: 15px; /* Menos padding en móviles */
+                padding: 15px;
             }
             button {
-                width: 100%; /* Botones ocupan el ancho completo */
-                padding: 12px; /* Aumentar el padding de los botones */
-                font-size: 18px; /* Aumentar el tamaño de fuente en móviles */
+                width: 100%;
+                padding: 12px;
+                font-size: 18px;
             }
             .activity {
-                padding: 10px; /* Menos padding en actividades */
+                padding: 10px;
             }
             .modal-content {
-                width: 90%; /* Aumentar el ancho en móviles */
-                padding: 15px; /* Menos padding en el modal */
+                width: 90%;
+                padding: 15px;
             }
         }
     </style>
 </head>
 <body>
 <header>
-    <h1>Área de ingeniería Informática (11)</h1>
+    <h1>Área de Ingeniería Informática (11)</h1>
+    <div class="semester">1er Semestre</div> <!-- Texto del semestre actualizado -->
     <button id="horarioButton">Ver Horario Actual</button>
-    <button id="profesoresButton">Ver Profesores y Materias</button> <!-- Nuevo botón -->
+    <button id="profesoresButton">Ver Profesores y Materias</button>
 </header>
 <div class="container" id="activitiesContainer">
     <!-- Las actividades se cargarán aquí desde localStorage -->
 </div>
 <div class="container" id="profesoresContainer" style="display: none;">
     <!-- Los profesores se cargarán aquí -->
-    <button id="backButton">Volver a Actividades</button> <!-- Botón para volver -->
+    <button id="backButton">Volver a Actividades</button>
 </div>
 <footer>
     <p>&copy; BY SLOWLYM, UNERG</p>
@@ -194,31 +209,34 @@
     const closeModal = document.getElementsByClassName('close')[0];
     const backButton = document.getElementById('backButton');
     const modalContent = document.getElementById('modalContent');
-    // Actividades de ejemplo
+
+    // Ejemplos de actividades relevantes para Ingeniería Informática
     const exampleActivities = [
-        { title: "Taller de Lenguaje y comunicacion", date: "04 de Noviembre 2024", time: "10:00 AM", description: "La comunicación" },
-        { title: "Examen de Logica Matemática", date: "06 de noviembre 2024", time: "10:45 PM", description: "Proposiciones" },
-        { title: "", date: "17 de noviembre 2023", time: "9:00 AM - 11:00 AM", description: "" }
+        { title: "Introducción a la Programación", date: "01 de Septiembre 2024", time: "08:00 AM", description: "Clase sobre conceptos básicos de programación." },
+        { title: "Algoritmos y Estructuras de Datos", date: "03 de Septiembre 2024", time: "10:00 AM", description: "Estudio de algoritmos y estructuras de datos fundamentales." },
+        { title: "Bases de Datos", date: "05 de Septiembre 2024", time: "12:00 PM", description: "Introducción a las bases de datos y SQL." },
+        { title: "Sistemas Operativos", date: "07 de Septiembre 2024", time: "02:00 PM", description: "Conceptos básicos de sistemas operativos." },
+        { title: "Desarrollo Web", date: "09 de Septiembre 2024", time: "04:00 PM", description: "Creación de páginas web utilizando HTML, CSS y JavaScript." }
     ];
-    // Profesores de ejemplo
+
     const profesores = [
         { nombre: "Diana Silva", materia: "Lenguaje y Comunicación" },
         { nombre: "Daniel Carpio", materia: "Deporte" },
-        { nombre: "Jhonny Gabazutt", materia: "Economia Digital" },
+        { nombre: "Jhonny Gabazutt", materia: "Economía Digital" },
         { nombre: "Cleiderman Rodriguez", materia: "Formación Constitucional"},
         { nombre: "Francis Ron", materia: "Fundamentos de la Informática" },
-        { nombre: "Luis Gonzales", materia: "Ingles I" },
+        { nombre: "Luis Gonzales", materia: "Inglés I" },
         { nombre: "Javier Almerida", materia: "Lógica Matemática" }
     ];
-    // Cargar actividades desde localStorage
+
     function loadActivities() {
         const activities = JSON.parse(localStorage.getItem('activities')) || exampleActivities;
-        activitiesContainer.innerHTML = ''; // Limpiar el contenedor
+        activitiesContainer.innerHTML = '';
         activities.forEach(activity => {
             addActivityToDOM(activity);
         });
     }
-    // Función para agregar actividad al DOM
+
     function addActivityToDOM(activity) {
         const newActivity = document.createElement('div');
         newActivity.classList.add('activity');
@@ -230,9 +248,9 @@
         `;
         activitiesContainer.appendChild(newActivity);
     }
-    // Función para mostrar la lista de profesores
+
     function mostrarProfesores() {
-        profesoresContainer.innerHTML = ''; // Limpiar el contenedor
+        profesoresContainer.innerHTML = '';
         profesores.forEach(profesor => {
             const profesorDiv = document.createElement('div');
             profesorDiv.classList.add('activity');
@@ -242,38 +260,47 @@
             `;
             profesoresContainer.appendChild(profesorDiv);
         });
-        profesoresContainer.style.display = 'block'; // Mostrar el contenedor de profesores
-        activitiesContainer.style.display = 'none'; // Ocultar contenedor de actividades
+        profesoresContainer.style.display = 'block';
+        activitiesContainer.style.display = 'none';
     }
-    // Función para volver a la vista de actividades
+
     function volverAActividades() {
-        profesoresContainer.style.display = 'none'; // Ocultar contenedor de profesores
-        activitiesContainer.style.display = 'block'; // Mostrar contenedor de actividades
-        window.scrollTo(0, 0); // Volver al principio de la página
+        profesoresContainer.style.display = 'none';
+        activitiesContainer.style.display = 'block';
+        window.scrollTo(0, 0);
     }
-    // Agregar eventos a los botones
+
     horarioButton.addEventListener('click', () => {
-        modal.style.display = 'block'; // Mostrar el modal
+        modal.style.display = 'block';
         setTimeout(() => {
-            modalContent.classList.add('show'); // Agregar clase para la animación de acercamiento
-        }, 10); // Esperar un breve momento para asegurar que el modal esté visible
+            modalContent.classList.add('show');
+        }, 10);
     });
-    profesoresButton.addEventListener('click', mostrarProfesores);
-    backButton.addEventListener('click', volverAActividades); // Evento para volver
-    // Cerrar el modal
+
+    // Cambiar el comportamiento del botón de profesores
+    profesoresButton.addEventListener('click', () => {
+        if (profesoresContainer.style.display === 'block') {
+            volverAActividades(); // Si ya está mostrando profesores, volver a actividades
+        } else {
+            mostrarProfesores(); // Si no, mostrar profesores
+        }
+    });
+
+    backButton.addEventListener('click', volverAActividades);
+
     closeModal.onclick = function() {
-        modalContent.classList.remove('show'); // Remover clase para la animación de alejamiento
+        modalContent.classList.remove('show');
         setTimeout(() => {
-            modal.style.display = 'none'; // Ocultar el modal después de la animación
-        }, 300); // Esperar el tiempo de la animación antes de ocultar
+            modal.style.display = 'none';
+        }, 300);
     }
-    // Cerrar el modal si se hace clic fuera de él
+
     window.onclick = function(event) {
         if (event.target === modal) {
-            closeModal.onclick(); // Llamar a la función de cerrar modal
+            closeModal.onclick();
         }
     }
-    // Cargar actividades al iniciar
+
     loadActivities();
 </script>
 </body>
